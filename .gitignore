@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Notion export (team notes, not part of the submission)
+DATA 2060 — DNN Final Project Team Hub*
+
+# Editors
+.vscode/
+.idea/
