@@ -8,34 +8,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from data import one_hot, prepare_dry_bean  # noqa: E402
 from train import accuracy, iterate_minibatches, sgd_step, train  # noqa: E402
 
-
-class SoftmaxRegression:
-    """Mock model with the shared interface (one layer, no hidden units).
-
-    Stands in for the real DNN until forward/backward are merged.
-    """
-
-    def __init__(self, n_in, n_out, seed=0):
-        rng = np.random.default_rng(seed)
-        self.weights = [rng.normal(0, 0.01, size=(n_in, n_out))]
-        self.biases = [np.zeros(n_out)]
-
-    def forward(self, X):
-        Z = X @ self.weights[0] + self.biases[0]
-        Z = Z - Z.max(axis=1, keepdims=True)
-        E = np.exp(Z)
-        self._X, self._P = X, E / E.sum(axis=1, keepdims=True)
-        return self._P
-
-    def loss(self, P, Y):
-        return float(-np.mean(np.sum(Y * np.log(np.clip(P, 1e-12, None)), axis=1)))
-
-    def backward(self, Y):
-        G = (self._P - Y) / Y.shape[0]
-        return [self._X.T @ G], [G.sum(axis=0)]
-
-    def predict(self, X):
-        return self.forward(X).argmax(axis=1)
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from mock_models import SoftmaxRegression  # noqa: E402
 
 
 def toy_data(n=120, seed=0):
