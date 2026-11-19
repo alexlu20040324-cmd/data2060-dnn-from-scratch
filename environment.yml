@@ -1,0 +1,13 @@
+name: data2060-dnn
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14
+  - numpy=2.5.2          # pinned: model results must be reproducible
+  - scikit-learn=1.9.0   # pinned: MLPClassifier reference comparison
+  - scipy>=1.18
+  - matplotlib>=3.11
+  - pytest>=9.1
+  - jupyterlab>=4.6
+  - ipykernel>=7.3
+  - nbconvert>=7.17      # export notebook to PDF/HTML
